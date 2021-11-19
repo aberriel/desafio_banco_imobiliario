@@ -73,7 +73,7 @@ Uma execução do programa proposto deve rodar 300 simulações, imprimindo no c
 às execuções. Esperamos encontrar nos dados as seguintes informações:
 
 
-- Quantas partidas terminam por *time out* (1000 rodadas);
-- Quantos turnos em média demora uma partida;
-- Qual a porcentagem de vitórias por comportamento dos jogadores;
-- Qual o comportamento que mais vence.
+> - Quantas partidas terminam por *time out* (1000 rodadas);
+> - Quantos turnos em média demora uma partida;
+> - Qual a porcentagem de vitórias por comportamento dos jogadores;
+> - Qual o comportamento que mais vence.
