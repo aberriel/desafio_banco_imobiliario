@@ -15,14 +15,14 @@ class Player:
             # Se o proprietário sou eu, não tem o que fazer, né?
             return True
         # Pago o aluguel
-        # print(f'Player.rent -> Tentando pagar o aluguel {property.valor_aluguel} do jogador {self.nome}')
+        # print(f'Player.rent -> Tentando pagar o aluguel {property.valor_aluguel} do player {self.nome}')
         self.balance -= property.rent_amount
         if self.balance < 0:
             # Nem dou o aluguel ao proprietário. O infeliz aqui não tem dinheiro.
             # print(f'Jogador.aluga -> Jogador {self.nome} perdeu por saldo negativo')
             return False
         # O proprietário recebe o aluguel
-        # print(f'Jogador.aluga -> Pagando o aluguel {property.valor_aluguel} ao jogador {property.proprietario.nome}')
+        # print(f'Jogador.aluga -> Pagando o aluguel {property.valor_aluguel} ao player {property.proprietario.nome}')
         property.owner.balance += property.rent_amount
         return True
 

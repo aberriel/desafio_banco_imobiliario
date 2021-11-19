@@ -1,4 +1,4 @@
-from .jogador import (
+from .player import (
     RandomPlayer,
     CautiousPlayer,
     DemandingPlayer,

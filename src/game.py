@@ -1,5 +1,5 @@
 from .house import House
-from .jogador import (
+from .player import (
     RandomPlayer,
     CautiousPlayer,
     DemandingPlayer,
