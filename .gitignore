@@ -22,6 +22,7 @@ wheels/
 django/progressive.egg-info
 .installed.cfg
 *.egg
+virtualenv/
 
 # Installer logs
 pip-log.txt

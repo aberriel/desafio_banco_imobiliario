@@ -79,3 +79,35 @@ Uma execução do programa proposto deve rodar 300 simulações, imprimindo no c
 > - Qual o comportamento que mais vence.
 
 
+# Implementação
+
+O projeto consiste na implementação do jogo descrito no desafio e o algorítmo responsável por realizar
+múltiplas execuções do mesmo em simulação e a análise dos dados coletados.
+
+## Descrição do conteúdo da pasta
+
+- src: contêm os arquivos-fonte da solução implementada e da realização da simulação, com geração dos
+dados para impressão no terminal
+- tests: contêm os testes unitários desenvolvidos para validar a implementação feita
+- requirements.txt: arquivo contendo as dependências para execução da simulação
+- tests.sh: script para execução dos testes
+
+## Configurando o ambiente para a realização da simulação
+
+Em um terminal, execute o seguinte:
+
+```
+$virtualenv -p python3.8 virtualenv/
+$source virtualenv/bin/activate
+$pip install -r requirements.txt
+```
+
+## Execução
+
+Para executar a simulação, basta rodar os comando (com a virtualenv ativada):
+
+```
+$cd src/
+$python -m convergence_analysis
+```
+    

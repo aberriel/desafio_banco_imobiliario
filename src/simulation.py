@@ -1,8 +1,8 @@
-from .house import House
-from .config import Config
-from .game import Game
-from .property import Property
-from .utils import *
+from house import House
+from config import Config
+from game import Game
+from property import Property
+from utils import *
 import time
 
 

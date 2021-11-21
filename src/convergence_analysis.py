@@ -1,6 +1,15 @@
-from .config import Config
-from .simulation import Simulation
-from .simulation_statistics import Statistics
+#! /usr/bin/env python
+
+import os
+import sys
+
+parent_module = sys.modules['.'.join(__name__.split('.')[:-1]) or '__main__']
+print(f'parent_module: {parent_module}')
+print(f'current_work_dir: {os.getcwd()}')
+
+from config import Config
+from simulation import Simulation
+from simulation_statistics import Statistics
 
 
 def collect_data(total_tests, print_data=True, properties_dict=None):
@@ -40,9 +49,24 @@ def main(total_tests=10):
     :param total_rounds: Total de execuções da simulação
     '''
     c = Config()
-    simulation_data = collect_data(total_tests=total_tests, print_data=True, properties_dict=c.properties_4)
+    simulation_data = collect_data(total_tests=total_tests, print_data=False, properties_dict=c.properties_4)
     processor = Statistics(data_set=simulation_data)
-    return processor
+    statistics = processor.run()
+
+    print('\n')
+    print('====================================================================================')
+    print('================================ Estatísticas ======================================')
+    print('====================================================================================')
+    print('\n')
+
+    print(f'* Partidas terminadas por timeout: {statistics["finished_by_timeout"]}')
+    print(f'* Duração média da partida: {statistics["rounds_average"]} turnos')
+    print(f'* Porcentagem de vitória por comportamento dos jogadores: ')
+    for player_type in statistics['players_statistics'].keys():
+        print(f'\t+ {player_type} - {statistics["players_statistics"][player_type]["win_percent"]}%')
+    print(f'* Comportamento(s) que mais vence(m): {", ".join(statistics["most_frequent_winners"]["player_types"])}')
+
+    return statistics
 
 
 def main_2(total_tests=10):
@@ -99,4 +123,4 @@ def main_2(total_tests=10):
 
 
 if __name__ == '__main__':
-    pass
+    main(300)

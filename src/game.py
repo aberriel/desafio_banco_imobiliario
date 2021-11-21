@@ -1,13 +1,7 @@
-from .house import House
-from .player import (
-    RandomPlayer,
-    CautiousPlayer,
-    DemandingPlayer,
-    ImpulsivePlayer)
-from .property import Property
-from .utils import make_players_with_aleatory_order
+from house import House
+from property import Property
+from utils import make_players_with_aleatory_order
 import numpy
-import random
 
 
 class Game:
