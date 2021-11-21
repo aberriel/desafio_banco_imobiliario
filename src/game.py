@@ -18,6 +18,7 @@ class Game:
         self.players = players or dict()
         self.houses = houses or dict()
         self.actual_player = actual_player or 1
+        self.players_report_info = {}
 
         if len(self.players.keys()) == 0:
             self.players = make_players_with_aleatory_order()
@@ -50,7 +51,8 @@ class Game:
                 property = Property(
                     purchase_price=purchase_price,
                     rent_amount=rent_amount,
-                    name=f'Casa {counter}')
+                    name=f'Casa {counter}',
+                    house=counter)
                 house.property = property
             self.houses[counter] = house
             counter += 1
@@ -93,8 +95,10 @@ class Game:
         if self.houses[next_house].property is not None:
             operation_result = player.buy_or_rent(self.houses[next_house].property)
             if not operation_result:
-                print(f'Player.next_play -> Jogador {player.name} rodando na rodada {self.round}')
                 player.lose_all()
+                player.player_info['last_round'] = self.round
+                player.player_info['status'] = 'looser'
+                self.players_report_info[player.name] = player.player_info
                 self.remove_player(player)
 
         self.actual_player = self.get_next_player()
@@ -102,5 +106,8 @@ class Game:
 
     def has_winner(self):
         if len(self.players.keys()) == 1:
+            self.players[1].player_info['last_round'] = self.round
+            self.players[1].player_info['status'] = 'winner'
+            self.players_report_info[self.players[1].name] = self.players[1].player_info
             return self.players[1]
         return None

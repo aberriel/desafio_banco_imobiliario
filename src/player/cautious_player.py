@@ -11,14 +11,9 @@ class CautiousPlayer(Player):
             order=order)
 
     def buy(self, property):
-        # print(f'CautiousPlayer.buy -> Entrando para property {property.nome}')
-        # print(f'CautiousPlayer.buy -> Casa da property: {property.house}')
-        # print(f'CautiousPlayer.buy -> Valor de compra: {property.valor_compra}')
-        # print(f'CautiousPlayer.buy -> Saldo inicial: {self.saldo}')
         if (self.balance - property.purchase_price) >= 80:
-            # print(f'CautiousPlayer.buy -> Comprando property {property.nome}')
             self.balance -= property.purchase_price
             self.properties.append(property)
             property.owner = self
-        # print(f'CautiousPlayer.buy -> Saldo final: {self.saldo}')
+            self.player_info['buy_payments'].append(property.purchase_price)
         return True

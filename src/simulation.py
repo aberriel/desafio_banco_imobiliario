@@ -7,18 +7,25 @@ import time
 
 
 class Simulation:
-    def __init__(self):
+    game = None
+    game_config = None
+
+    def __init__(self, game_config=None):
         self.players = make_players_with_aleatory_order()
         self.houses = self.make_houses()
+        self.game_config = game_config
 
     def make_houses(self):
-        config = Config()
+        if not self.game_config:
+            config = Config()
+            self.game_config = config.properties_2
+
         houses = dict()
         counter = 0
-        while counter <= max(config.properties.keys()):
+        while counter <= max(self.game_config.keys()):
             house = House(position=0)
             if counter > 0:
-                raw_property = config.properties[counter]
+                raw_property = self.game_config[counter]
                 property = Property(
                     purchase_price=raw_property['purchase_price'],
                     rent_amount=raw_property['rent_amount'],
@@ -31,7 +38,6 @@ class Simulation:
 
     def run(self):
         self.game = Game(players=self.players, houses=self.houses)
-
         start = time.time()
         while True:
             self.game.next_play()
@@ -41,10 +47,10 @@ class Simulation:
 
         result = {
             'total_time': end - start,
-            'total_rounds': self.game.round,
-            'last_player': self.game.actual_player}
+            'total_rounds': self.game.round}
 
         winner = self.game.has_winner()
         result['winner'] = winner.name if winner is not None else None
         result['winner_final_balance'] = winner.balance if winner else 0
+        result['players_info'] = self.game.players_report_info
         return result

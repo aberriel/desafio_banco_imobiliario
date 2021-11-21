@@ -11,15 +11,10 @@ class ImpulsivePlayer(Player):
             order=order)
 
     def buy(self, property):
-        # print(f'ImpulsivePlayer.buy -> Entrando para property {property.nome}')
-        # print(f'ImpulsivePlayer.buy -> Casa da property: {property.house}')
-        # print(f'ImpulsivePlayer.buy -> Valor da property: {property.valor_compra}')
-        # print(f'ImpulsivePlayer.buy -> Saldo inicial: {self.saldo}')
         self.balance -= property.purchase_price
         if self.balance < 0:
-            # print(f'JogadorImpulsivo.compra -> Saindo por saldo negativo')
             return False
         self.properties.append(property)
         property.owner = self
-        # print(f'JogadorImpulsivo.compra -> Saldo final: {self.saldo}')
+        self.player_info['buy_payments'].append(property.purchase_price)
         return True

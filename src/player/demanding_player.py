@@ -11,17 +11,11 @@ class DemandingPlayer(Player):
             order=order)
 
     def buy(self, property):
-        # print(f'DemandingPlayer.buy -> Entrando para property {property.nome}')
-        # print(f'DemandingPlayer.buy -> Casa da property: {property.house}')
-        # print(f'DemandingPlayer.buy -> Valor do aluguel da property: {property.valor_aluguel}')
-        # print(f'DemandingPlayer.buy -> Valor de compra: {property.valor_compra}')
-        # print(f'DemandingPlayer.buy -> Saldo inicial: {self.saldo}')
         if property.rent_amount > 50:
             self.balance -= property.purchase_price
             if self.balance < 0:
-                # print(f'DemandingPlayer.buy -> Saindo do game por saldo negativo')
                 return False
             self.properties.append(property)
             property.owner = self
-        # print(f'DemandingPlayer.buy -> Saldo final: {self.saldo}')
+            self.player_info['buy_payments'].append(property.purchase_price)
         return True
