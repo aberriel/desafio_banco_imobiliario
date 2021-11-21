@@ -50,7 +50,9 @@ class Simulation:
             'total_rounds': self.game.round}
 
         winner = self.game.has_winner()
+        result['status'] = 'finished_by_winner' if winner is not None else 'finished_by_timeout'
+
         result['winner'] = winner.name if winner is not None else None
-        result['winner_final_balance'] = winner.balance if winner else 0
+        result['winner_final_balance'] = float(winner.balance) if winner else 0
         result['players_info'] = self.game.players_report_info
         return result

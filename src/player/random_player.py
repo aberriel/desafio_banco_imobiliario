@@ -3,7 +3,7 @@ import numpy
 
 
 class RandomPlayer(Player):
-    def __init__(self, properties=None, house=0, balance=300, name='Aleatorio', order=0):
+    def __init__(self, properties=None, house=0, balance=300, name='Random', order=0):
         super(RandomPlayer, self).__init__(
             name=name,
             house=house,
