@@ -5,7 +5,7 @@ from .player import (
     DemandingPlayer,
     ImpulsivePlayer)
 from .property import Property
-from .utils import *
+from .utils import make_players_with_aleatory_order
 import numpy
 import random
 
@@ -68,16 +68,16 @@ class Game:
             next = 1
         return next
 
-    def remove_player(self, jogador):
-        self.houses[jogador.house].players.remove(jogador)
-        del self.players[jogador.ordem]
+    def remove_player(self, player_to_delete):
+        self.houses[player_to_delete.house].players.remove(player_to_delete)
+        del self.players[player_to_delete.order]
 
         # Agora vamos reestruturar os players
         counter = 1
         dict_players_2 = dict()
         for item in self.players.keys():
             dict_players_2[counter] = self.players[item]
-            dict_players_2[counter].ordem = counter
+            dict_players_2[counter].order = counter
             counter += 1
         self.players  =dict_players_2
 

@@ -17,7 +17,7 @@ def make_players_with_aleatory_order():
     order = random.sample(range(4), 4)
     player_counter = 0
     for order_item in order:
-        raw_players[player_counter].ordem = order_item + 1
+        raw_players[player_counter].order = order_item + 1
         players[order_item + 1] = raw_players[player_counter]
         player_counter += 1
     return players

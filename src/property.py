@@ -8,11 +8,12 @@ class Property:
 
     def __str__(self):
         return f'{self.name} | C: R${self.purchase_price} | A: R${self.rent_amount}' \
-            if self.name else f'C: R${self.purchase_price} | A: R${self.rent_amount}'
+            if self.name and len(self.name) > 0 \
+            else f'C: R${self.purchase_price} | A: R${self.rent_amount}'
 
     def to_json(self):
         return {
-            'owner': self.owner.name if self.owner is not None else 'SEM PROPRIETÁRIO',
+            'owner': self.owner.name if self.owner is not None else 'NO OWNER',
             'purchase_price': self.purchase_price,
             'rent_amount': self.rent_amount,
             'name': self.name,

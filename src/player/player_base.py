@@ -4,7 +4,7 @@ class Player:
         self.house = house
         self.properties = properties or []
         self.balance = balance
-        self.ordem = order or 0
+        self.order = order or 0
         self.player_info = {
             'last_round': None,
             'status': None,
@@ -30,7 +30,7 @@ class Player:
         self.player_info['rent_payments'].append(property.rent_amount)
         return True
 
-    def buy_or_rent(self, property):
+    def buy_or_rent(self, property=None):
         if property is None:
             return True
         return self.buy(property) \
