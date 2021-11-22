@@ -17,18 +17,40 @@ import time
 
 
 class Simulation:
+    '''
+    Classe para realização de simulação de jogo de ponta a ponta, isto é, desde
+    a montagem do cenário inicial (montagem do tabuleiro e sorteio da ordem de
+    jogada dos jogadores), passando pela movimentação no tabuleiro e detecção
+    das condições de encerramento do jogo.
+    '''
     game = None
     game_config = None
 
     def __init__(self, game_config=None):
+        '''
+        Construtor da classe.
+        Aqui é sorteada a ordem dos jogadores e montado o tabuleiro.
+        :param game_config: Configuração das propriedades, contendo a ordem em que
+                            devem aparecer e os valores.
+        '''
+        self.game_config = game_config
         self.players = make_players_with_aleatory_order()
         self.houses = self.make_houses()
-        self.game_config = game_config
 
     def make_houses(self):
+        '''
+        Aqui é onde o tabuleiro é montado de fato. Crio as casas, as propriedades que
+        estarão em cada casa do tabuleiro e as adiciono as casas segundo a configuração
+        recebida.
+
+        Caso eu não tenha recebido nenhuma configuração, a configuração 5 (a de menor valor)
+        é utilizada.
+        :return: Dicionário contendo a estrutura de casas na ordem em que será apresentada
+                 (no caso, a ordem é a chave do dict).
+        '''
         if not self.game_config:
             config = Config()
-            self.game_config = config.properties_2
+            self.game_config = config.properties_5
 
         houses = dict()
         counter = 0

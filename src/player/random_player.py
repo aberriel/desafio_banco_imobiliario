@@ -24,6 +24,13 @@ class RandomPlayer(Player):
             order=order)
 
     def buy(self, property):
+        '''
+        Peocesso de compra para o jogador aleatório.
+        Neste caso, uma moeda não viciada decidirá se irá comprar ou não.
+        :param property: Propriedade envolvida na transação.
+        :return: Flag indicador se a operação foi bem-sucedida ou o jogador
+                 perdeu a partid
+        '''
         can_buy = numpy.random.randint(low=0, high=2)
         if can_buy == 1:
             self.balance -= property.purchase_price

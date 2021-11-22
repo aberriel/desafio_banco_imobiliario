@@ -23,13 +23,17 @@ def make_players_with_aleatory_order():
     Cria jogadores aleatórios (no caso, um de cada tipo) e os ordena por uma ordem aleatória.
     :return: Lista de jogadores criada em ordem aleatória
     '''
+
+    # Instanciando cada comportamento
     player_1 = RandomPlayer()
     player_2 = CautiousPlayer()
     player_3 = DemandingPlayer()
     player_4 = ImpulsivePlayer()
+    # Gerando uma lista inicialmente ordenada com todos os jogadores
     raw_players = [player_1, player_2, player_3, player_4]
     players = dict()
 
+    # Fazendo o shuffle
     order = random.sample(range(4), 4)
     player_counter = 0
     for order_item in order:

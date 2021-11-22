@@ -79,8 +79,15 @@ class Game:
             self.players[player_position].house = 0
 
     def get_next_player(self):
+        '''
+        Calcula o índice do próximo jogador a jogar.
+        :return: Número correspondente à key do próximo jogador no
+                 dicinoário de jogadores.
+        '''
         next = self.actual_player + 1
         if next > len(self.players.keys()):
+            # Somente para o caso do próximo jogador estar além dos que estão
+            # no jogo, eu volto pro começo.
             next = 1
         return next
 
@@ -101,28 +108,59 @@ class Game:
             counter += 1
         self.players = dict_players_2
 
-    def update_player_house(self, player_to_update, final_house):
+    def update_player_house(self, player_to_update, final_house, back_to_init=False):
+        '''
+        Aqui é onde eu faço a movimentação do jogador no tabuleiro.
+        :param player_to_update: Jogador que terá sua posição atualizada
+        :param final_house: número (índice) da casa final
+        :param back_to_init: Flag indicativo se houve retorno ao começo do tabuleiro
+        '''
+        # Removo o jogador da lista de jogadores da casa antiga dele
         self.houses[player_to_update.house].players.remove(player_to_update)
+        # Atualizo, no jogador, a posição da nova casa
         player_to_update.house = final_house
+        # Adiciono o jogador à lista de jogadores da casa nova
         self.houses[final_house].players.append(player_to_update)
+        if back_to_init:
+            # No caso de conseguir voltar ao começo, pago 100 a ele.
+            player_to_update.balance += 100
+            player_to_update.player_info['lap_counter'] += 1
 
     def next_play(self):
         '''Realiza a próxima jogada (ou a do próximo lançamento...'''
+        # Pegando o jogador da vez
         player = self.players[self.actual_player]
+        # Aqui eu jogo o dado
         dice = numpy.random.randint(low=1, high=7)
-        next_house = player.get_next_house(dice, len(self.houses.keys()) - 1)
-        self.update_player_house(player, next_house)
+        # Localizo a casa sorteada
+        next_house, back_to_init = player.get_next_house(
+            dice, len(self.houses.keys()) - 1)
+        # Faço a movimentação do jogador no tabuleiro
+        self.update_player_house(player, next_house, back_to_init)
 
+        # Aqui checo se tem propriedade definida nesta casa
         if self.houses[next_house].property is not None:
+            # Realizando a operação (compra ou aluguel)
             operation_result = player.buy_or_rent(self.houses[next_house].property)
+            # Resultado falho correponde ao caso de saldo negativo após a
+            # operação. Neste caso, ocorre a saída do jogo por derrota.
             if not operation_result:
+                # Jogador perde todas as propriedades
                 player.lose_all()
+                # No extrato de movimentos do jogador, marco o último round dele
                 player.player_info['last_round'] = self.round
+                # Marco que o jogador saiu por derrota do jogo
                 player.player_info['status'] = 'looser'
+                # Salvo o extrato do jogador no extrato da partida, pois o
+                # jogador irá desaparecer bem aqui....
                 self.players_report_info[player.name] = player.player_info
+                # Bye, bye!!!
                 self.remove_player(player)
 
+        # Atualizo o ponteiro para o jogador da vez
         self.actual_player = self.get_next_player()
+        # Atualizo o contador de rounds (necessário para o cálculo da
+        # média de rounds por partida ao final da simulação.
         self.round += 1
 
     def has_winner(self):
@@ -132,6 +170,10 @@ class Game:
         :return: Dados do jogador vencedor (o encontrado) ou None.
         '''
         if len(self.players.keys()) == 1:
+            # O reconhecimento de um vencedor ocorre sempre que, ao fim de um
+            # movimento, é detectado somente um jogador no tabuleiro.
+            # Vale ressaltar que o jogador é removido do jogo assim que, ao fim
+            # de uma operação, é detectado que o mesmo ficou com saldo negativo.
             self.players[1].player_info['last_round'] = self.round
             self.players[1].player_info['status'] = 'winner'
             self.players_report_info[self.players[1].name] = self.players[1].player_info

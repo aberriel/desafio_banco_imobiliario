@@ -1,4 +1,5 @@
 class Config:
+    '''Configurações de propriedades para a montagem do tabuleiro.'''
     properties = {
         1: {
             'name': 'Butantã',

@@ -64,7 +64,7 @@ class Player {
     +rent(property : Property) : bool
     +buy_or_rent(property : Property) : bool
     +lose_all()
-    +get_next_house(houses_to_go : int, total_houses : int) : House
+    +get_next_house(house_to_go : int, total_houses : int) : House
 }
 
 class CautiousPlayer extends Player {

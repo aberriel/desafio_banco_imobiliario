@@ -15,20 +15,28 @@ def collect_data(total_tests, print_data=True, properties_dict=None):
     '''
     Realiza a etapa inicial do ETC (modelagem do que será construído).
     :param total_tests: Total de testes (execução da simulação) serão aceitos.
-    :param print_data:
-    :param properties_dict:
+    :param print_data: Flag que indica se quero imprimir no console o resultado
+                       final de cada round.
+                       Coloquei como opção para permitir testar sem ter o console
+                       poluído.
+    :param properties_dict: Dict contendo a configuração das propriedades a serem
+                            utilizadas no jogo.
     :return:
     '''
     result_list = []
     count = 0
+    if not properties_dict:
+        # Se não defini nenhuma configuração de propriedades, utilizo
+        # a que possui os menores valores
+        c = Config()
+        properties_dict = c.properties_5
     while count < total_tests:
-        if not properties_dict:
-            c = Config()
-            properties_dict = c.properties_5
+        # Aqui executo a simulação de uma partida completa
         simulation = Simulation(game_config=properties_dict)
         result = simulation.run()
 
         if print_data:
+            # Só se quero exibir o resultado da partida no console.
             final_status = 'TIMEOUT' \
                 if result['status'] == 'finished_by_timeout' else 'WINNER'
             winner = result['winner'] if result['winner'] is not None \
@@ -36,6 +44,7 @@ def collect_data(total_tests, print_data=True, properties_dict=None):
             print(f'({count + 1}) ROUNDS {result["total_rounds"]} | '
                   f'WINNER {winner} | STATUS {final_status}')
 
+        # Guardo o resultado desta simulação. E parto pra próxima.
         result_list.append(result)
         count += 1
     return result_list
@@ -52,13 +61,20 @@ def main(total_tests=10):
 
     Esta análise rodará sobre o set de dados 4, o de menor valor variável para os imóveis.
 
-    :param total_rounds: Total de execuções da simulação
+    :param total_rounds: Total de execuções da simulação.
+                         Por default coloquei 10 (permite tirar a prova
+                         dos 9 na mão).
     '''
     c = Config()
-    simulation_data = collect_data(total_tests=total_tests, print_data=False, properties_dict=c.properties_4)
+    # Realizo a simulação
+    simulation_data = collect_data(total_tests=total_tests,
+                                   print_data=False,
+                                   properties_dict=c.properties_2)
+    # Calculo as estatísticas
     processor = Statistics(data_set=simulation_data)
     statistics = processor.run()
 
+    # Exibindo as estatísticas no console
     print('\n')
     print('====================================================================================')
     print('================================ Estatísticas ======================================')
