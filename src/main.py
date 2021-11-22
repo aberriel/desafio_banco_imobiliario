@@ -40,9 +40,9 @@ def collect_data(total_tests, print_data=True, properties_dict=None):
             final_status = 'TIMEOUT' \
                 if result['status'] == 'finished_by_timeout' else 'WINNER'
             winner = result['winner'] if result['winner'] is not None \
-                else 'TH'
-            print(f'({count + 1}) ROUNDS {result["total_rounds"]} | '
-                  f'WINNER {winner} | STATUS {final_status}')
+                else 'NO WINNER'
+            print(f'({count + 1}) ROUNDS: {result["total_rounds"]} | '
+                  f'WINNER: {winner} | STATUS: {final_status}')
 
         # Guardo o resultado desta simulação. E parto pra próxima.
         result_list.append(result)
@@ -68,8 +68,8 @@ def main(total_tests=10):
     c = Config()
     # Realizo a simulação
     simulation_data = collect_data(total_tests=total_tests,
-                                   print_data=False,
-                                   properties_dict=c.properties_4)
+                                   print_data=True,
+                                   properties_dict=c.properties_2)
     # Calculo as estatísticas
     processor = Statistics(data_set=simulation_data)
     statistics = processor.run()
