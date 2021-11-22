@@ -1,6 +1,19 @@
-from house import House
-from property import Property
-from utils import make_players_with_aleatory_order
+import os
+import sys
+
+parent_module = sys.modules['.'.join(__name__.split('.')[:-1]) or '__main__']
+print(f'game.py -> parent_module: {parent_module}')
+print(f'game.py -> current_work_dir: {os.getcwd()}')
+
+
+if 'src' in os.getcwd():
+    from house import House
+    from property import Property
+    from utils import make_players_with_aleatory_order
+else:
+    from src.house import House
+    from src.property import Property
+    from src.utils import make_players_with_aleatory_order
 import numpy
 
 

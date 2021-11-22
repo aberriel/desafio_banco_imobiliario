@@ -1,15 +1,14 @@
 #! /usr/bin/env python
 
 import os
-import sys
-
-parent_module = sys.modules['.'.join(__name__.split('.')[:-1]) or '__main__']
-print(f'parent_module: {parent_module}')
-print(f'current_work_dir: {os.getcwd()}')
-
-from config import Config
-from simulation import Simulation
-from simulation_statistics import Statistics
+if 'src' in os.getcwd():
+    from config import Config
+    from simulation import Simulation
+    from simulation_statistics import Statistics
+else:
+    from src.config import Config
+    from src.simulation import Simulation
+    from src.simulation_statistics import Statistics
 
 
 def collect_data(total_tests, print_data=True, properties_dict=None):

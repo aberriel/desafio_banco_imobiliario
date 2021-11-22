@@ -1,8 +1,18 @@
-from player import (
-    RandomPlayer,
-    CautiousPlayer,
-    DemandingPlayer,
-    ImpulsivePlayer)
+import os
+
+
+if 'src' in os.getcwd():
+    from player import (
+        RandomPlayer,
+        CautiousPlayer,
+        DemandingPlayer,
+        ImpulsivePlayer)
+else:
+    from src.player import (
+        RandomPlayer,
+        CautiousPlayer,
+        DemandingPlayer,
+        ImpulsivePlayer)
 import random
 
 

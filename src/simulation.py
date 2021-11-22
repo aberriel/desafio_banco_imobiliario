@@ -1,8 +1,18 @@
-from house import House
-from config import Config
-from game import Game
-from property import Property
-from utils import *
+import os
+
+
+if 'src' in os.getcwd():
+    from config import Config
+    from game import Game
+    from house import House
+    from property import Property
+    from utils import *
+else:
+    from src.config import Config
+    from src.game import Game
+    from src.house import House
+    from src.property import Property
+    from src.utils import *
 import time
 
 
