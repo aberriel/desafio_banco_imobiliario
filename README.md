@@ -111,6 +111,21 @@ $cd src/
 $python -m main
 ```
 
+## Execução pelo PyCharm
+
+1. Atente para a área à esquerda, onde se localiza o navegador por arquivos. Abra o ítem "src", onde estão os arquivos-fonte
+<img width="1440" alt="Captura de Tela 2021-11-22 às 13 02 20" src="https://user-images.githubusercontent.com/901052/142894553-ed230102-3cf6-4ee3-9663-6628a54d40e0.png">
+
+2. Clique com o botão direito do mouse sobre o arquivo main.py. A opção "RUN 'main'" deve ser localizada e selecionada.
+<img width="1440" alt="Captura de Tela 2021-11-22 às 13 03 06" src="https://user-images.githubusercontent.com/901052/142894623-c9db21b0-4c5b-47ae-a979-fcab28d8cdb0.png">
+
+3. A execução aparecerá em uma área de terminal na parte de baixo do PyCharm, conforme pode ser visto abaixo.
+<img width="1440" alt="Captura de Tela 2021-11-22 às 13 03 32" src="https://user-images.githubusercontent.com/901052/142894727-cc32c0f8-3811-4107-9813-6eeb041f0601.png">
+
+
+
+
+
 ## Testes
 
 Como o tempo foi curto, ainda não consegui cobrir tudo com testes, mas alguns estão disponíveis
