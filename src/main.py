@@ -69,7 +69,7 @@ def main(total_tests=10):
     # Realizo a simulação
     simulation_data = collect_data(total_tests=total_tests,
                                    print_data=False,
-                                   properties_dict=c.properties_2)
+                                   properties_dict=c.properties_4)
     # Calculo as estatísticas
     processor = Statistics(data_set=simulation_data)
     statistics = processor.run()
