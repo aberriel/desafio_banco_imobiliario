@@ -140,10 +140,12 @@ class TestPlayerBase(TestCase):
 
     def test_next_house(self):
         self.player_base.house = 16
-        result = self.player_base.get_next_house(2, 20)
-        assert result == 18
+        next_house, lap = self.player_base.get_next_house(2, 20)
+        assert next_house == 18
+        assert lap is False
 
     def test_next_house_back_to_start(self):
         self.player_base.house = 16
-        result = self.player_base.get_next_house(6, 20)
-        assert result == 1
+        next_house, lap = self.player_base.get_next_house(6, 20)
+        assert next_house == 1
+        assert lap is True

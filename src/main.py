@@ -91,58 +91,5 @@ def main(total_tests=10):
     return statistics
 
 
-def main_2(total_tests=10):
-    '''
-    Esta função executará a análise acima considerando todos os 4 sets de dados, realizando
-    um comparativo das análises pedidas para os sets considerando:
-
-        - Valor base (properties_1)
-        - 50%
-        - 25%
-        - 12,5%
-        - Valores fixos e iguais para todos em 5 (compra) e 2 (aluguel)
-
-    A análise consistirá em um comparativo dos dados pedidos para os 5 sets de dados.
-
-    :param total_rounds:
-    :return:
-    '''
-    c = Config()
-    simulation_properties_1 = collect_data(
-        total_tests=total_tests,
-        print_data=False,
-        properties_dict=c.properties)
-    processor_1 = Statistics(data_set=simulation_properties_1)
-    statistics_1 = processor_1.run()
-
-    simulation_properties_2 = collect_data(
-        total_tests=total_tests,
-        print_data=False,
-        properties_dict=c.properties_2)
-    processor_2 = Statistics(data_set=simulation_properties_2)
-    statistics_2 = processor_2.run()
-
-    simulation_properties_3 = collect_data(
-        total_tests=total_tests,
-        print_data=False,
-        properties_dict=c.properties_3)
-    processor_3 = Statistics(data_set=simulation_properties_3)
-    statistics_3 = processor_3.run()
-
-    simulation_properties_4 = collect_data(
-        total_tests=total_tests,
-        print_data=False,
-        properties_dict=c.properties_4)
-    processor_4 = Statistics(data_set=simulation_properties_4)
-    statistics_4 = processor_4.run()
-
-    simulation_properties_5 = collect_data(
-        total_tests=total_tests,
-        print_data=False,
-        properties_dict=c.properties_5)
-    processor_5 = Statistics(data_set=simulation_properties_5)
-    statistics_5 = processor_5.run()
-
-
 if __name__ == '__main__':
     main(300)

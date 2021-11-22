@@ -110,4 +110,14 @@ Para executar a simulação, basta rodar os comando (com a virtualenv ativada):
 $cd src/
 $python -m main
 ```
+
+## Testes
+
+Como o tempo foi curto, ainda não consegui cobrir tudo com testes, mas alguns estão disponíveis
+e podem ser executados a partir da pasta raiz do projeto (a que contem a "tests"e a "src"),
+executando o seguinte comando:
+
+```
+$python -m pytest $(CAPTURE) --cov=tests --cov=src -W ignore::DeprecationWarning --cov-report term-missing:skip-covered
+```
     
