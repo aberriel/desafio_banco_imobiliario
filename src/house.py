@@ -1,5 +1,12 @@
 class House:
+    '''Esta classe é, por definição, a casa do tabuleiro do jogo.'''
     def __init__(self, position, players=None, property=None):
+        '''
+        Construtor da classe
+        :param position: Posição que a casa ocupa no tabuleiro
+        :param players: Jogadores que estão ocupando esta casa
+        :param property: Propriedade que está nesta casa.
+        '''
         self.position = position
         self.players = players or []
         self.property = property

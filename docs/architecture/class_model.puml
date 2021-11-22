@@ -1,0 +1,133 @@
+@startuml
+title Real Estate Bank Game Data Model
+
+skinparam style strictuml
+skinparam groupInheritance 2
+
+class Config {
+    +properties : dict
+    +properties_2 : dict
+    +properties_3 : dict
+    +properties_4 : dict
+    +properties_5 : dict
+}
+
+class Property {
+    +purchase_price : int
+    +rent_amount : int
+    +name : String
+    +owner : Player
+    +house : House
+    __ Methods __
+    -__str__() : String
+    +to_json() : dict
+}
+
+class House {
+    +position : int
+    +players : List[Player]
+    +property : Property
+    __ Methods __
+    -__str__() : String
+    -__repr__() : String
+}
+
+Property "1" -- "1" House
+
+class Game {
+    +round : int
+    +players : dict
+    +houses : dict
+    +actual_player : int
+    +players_report_info : dict
+    __ Methods __
+    -__init__(round: int, players: dict, houses: dict, actual_player: int)
+    +prepare_report()
+    +make_randon_houses()
+    +arrange_players_rouses()
+    +get_next_player() : int
+    +remove_player(player_to_delete: Player)
+    +update_player_house(player_to_update: Player, final_house: House)
+    +next_play()
+    +has_winner(): List[Player]
+}
+
+class Player {
+    +name : String
+    +house : House
+    +properties : List[Property]
+    +balance : int
+    +order : int
+    +player_info : dict
+    __ Methods __
+    +buy(property : Property)
+    +rent(property : Property) : bool
+    +buy_or_rent(property : Property) : bool
+    +lose_all()
+    +get_next_house(houses_to_go : int, total_houses : int) : House
+}
+
+class CautiousPlayer extends Player {
+    +name : String
+    +house : House
+    +properties : List[Property]
+    +balance : int
+    +order : int
+    __ Methods __
+    +buy(property : Property) : bool
+}
+class ImpulsivePlayer extends Player {
+    +name : String
+    +house : House
+    +properties : List[Property]
+    +balance : int
+    +order : int
+    __ Methods __
+    +buy(property : Property) : bool
+}
+class DemandingPlayer extends Player {
+    +name : String
+    +house : House
+    +properties : List[Property]
+    +balance : int
+    +order : int
+    __ Methods __
+    +buy(property : Property) : bool
+}
+class RandomPlayer extends Player {
+    +name : String
+    +house : House
+    +properties : List[Property]
+    +balance : int
+    +order : int
+    __ Methods __
+    +buy(property : Property) : bool
+}
+
+class Simulation {
+    +game : Game
+    +game_config : dict
+    +players : dict
+    +houses : dict
+    +game_config : Config
+    __ Methods __
+    +make_houses() : dict
+    +run() : dict
+}
+
+Simulation "1" -- "1 .. *" Game
+Simulation -- Config
+
+class Statistics {
+    __ Methods __
+    +reset_player_stats()
+    +count_finances()
+    +count_winners()
+    +most_frequent_winner() : (List[Player], int)
+    +mount_players_statistics()
+    +total_games_finished_by_timeout() : int
+    +run() : dict
+}
+
+
+@enduml

@@ -1,6 +1,8 @@
 import os
 
 
+# Hack para resolver o problema dos imports que nunca funcionaram para os casos
+# de execução normal (pelo PyCharm ou terminal direto).
 if 'src' in os.getcwd():
     from player import (
         RandomPlayer,
@@ -17,6 +19,10 @@ import random
 
 
 def make_players_with_aleatory_order():
+    '''
+    Cria jogadores aleatórios (no caso, um de cada tipo) e os ordena por uma ordem aleatória.
+    :return: Lista de jogadores criada em ordem aleatória
+    '''
     player_1 = RandomPlayer()
     player_2 = CautiousPlayer()
     player_3 = DemandingPlayer()

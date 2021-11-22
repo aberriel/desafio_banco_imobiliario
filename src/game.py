@@ -1,11 +1,4 @@
 import os
-import sys
-
-parent_module = sys.modules['.'.join(__name__.split('.')[:-1]) or '__main__']
-print(f'game.py -> parent_module: {parent_module}')
-print(f'game.py -> current_work_dir: {os.getcwd()}')
-
-
 if 'src' in os.getcwd():
     from house import House
     from property import Property
@@ -18,9 +11,25 @@ import numpy
 
 
 class Game:
+    '''
+        Classe que define os elementos relacionados ao jogo.
+        Esta classe também pode ser dada como equivalente ao tabuleiro do jogo (mas também
+    possui os métodos relacionados à movimentação do jogo e ao encerramento de partida do
+    jogo, com retorno do vencedor cjo haja.
+    '''
     game_report = dict()
 
     def __init__(self, round=0, players=None, houses=None, actual_player=1):
+        '''
+        Construtor da classe
+        :param round: Número do round atual desde o começo da partida
+        :param players: Jogadores que estão participando.
+                        Vale considerar que quando um jogador sai do jogo, ele é (ou
+                        deverá ser) removido da lista de jogadores da partida.
+        :param houses: Casas do tabuleiro, que podem conter uma propriedade ou não.
+        :param actual_player: Número (índice) do jogador atual da partida, o que tem
+                              o ves.
+        '''
         self.round = round
         self.players = players or dict()
         self.houses = houses or dict()
@@ -76,6 +85,10 @@ class Game:
         return next
 
     def remove_player(self, player_to_delete):
+        '''
+        Remove jogador da lista de jogadores ativos na partida.
+        :param player_to_delete: player_to_delete
+        '''
         self.houses[player_to_delete.house].players.remove(player_to_delete)
         del self.players[player_to_delete.order]
 
@@ -86,14 +99,15 @@ class Game:
             dict_players_2[counter] = self.players[item]
             dict_players_2[counter].order = counter
             counter += 1
-        self.players  =dict_players_2
+        self.players = dict_players_2
 
-    def update_player_house(self, jogador, casa_final):
-        self.houses[jogador.house].players.remove(jogador)
-        jogador.house = casa_final
-        self.houses[casa_final].players.append(jogador)
+    def update_player_house(self, player_to_update, final_house):
+        self.houses[player_to_update.house].players.remove(player_to_update)
+        player_to_update.house = final_house
+        self.houses[final_house].players.append(player_to_update)
 
     def next_play(self):
+        '''Realiza a próxima jogada (ou a do próximo lançamento...'''
         player = self.players[self.actual_player]
         dice = numpy.random.randint(low=1, high=7)
         next_house = player.get_next_house(dice, len(self.houses.keys()) - 1)
@@ -112,6 +126,11 @@ class Game:
         self.round += 1
 
     def has_winner(self):
+        '''
+            Checa se tem vencedor da partida. Caso tenha, a partida deverá ser encerrada
+        imediatamente.
+        :return: Dados do jogador vencedor (o encontrado) ou None.
+        '''
         if len(self.players.keys()) == 1:
             self.players[1].player_info['last_round'] = self.round
             self.players[1].player_info['status'] = 'winner'

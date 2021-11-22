@@ -3,7 +3,19 @@ import numpy
 
 
 class RandomPlayer(Player):
+    '''
+    Model para o jogador do tipo "random".
+    O jogador Random é o que não decide apenas com base no tempo ou outro algo aleatório...
+    '''
     def __init__(self, properties=None, house=0, balance=300, name='Random', order=0):
+        '''
+        Construtor da classe
+        :param properties:
+        :param house: Casa onde o player está
+        :param balance: Saldo total da conta do player
+        :param name: Nome do player
+        :param order:
+        '''
         super(RandomPlayer, self).__init__(
             name=name,
             house=house,

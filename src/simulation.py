@@ -47,6 +47,11 @@ class Simulation:
         return houses
 
     def run(self):
+        '''
+        Executa 1 simulação (ou caso de teste) para fins de teste.
+        :return: dict contendo o resultado da simulação, contendo os dados em um
+                 dict mas também caso removidos...
+        '''
         self.game = Game(players=self.players, houses=self.houses)
         start = time.time()
         while True:

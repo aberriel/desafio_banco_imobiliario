@@ -12,6 +12,13 @@ else:
 
 
 def collect_data(total_tests, print_data=True, properties_dict=None):
+    '''
+    Realiza a etapa inicial do ETC (modelagem do que será construído).
+    :param total_tests: Total de testes (execução da simulação) serão aceitos.
+    :param print_data:
+    :param properties_dict:
+    :return:
+    '''
     result_list = []
     count = 0
     while count < total_tests:

@@ -108,6 +108,6 @@ Para executar a simulação, basta rodar os comando (com a virtualenv ativada):
 
 ```
 $cd src/
-$python -m convergence_analysis
+$python -m main
 ```
     
